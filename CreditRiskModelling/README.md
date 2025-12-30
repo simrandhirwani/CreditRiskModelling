@@ -16,7 +16,7 @@ Unlike black-box models, this project utilizes **Weight of Evidence (WoE)** tran
 * **Language:** Python 3.x
 * **Libraries:** Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn, SciPy
 * **Web Framework:** Flask
-* **Containerization:** (Optional: Add Docker if you use it later)
+
 
 ## 📂 Project Structure
 This repository documents the entire lifecycle of the project, from initial data exploration to final deployment:
@@ -28,7 +28,7 @@ This repository documents the entire lifecycle of the project, from initial data
 | `03_Model_Training_Evaluation` | Model selection experiments, hyperparameter tuning, and performance metrics validation. |
 | `04_Deployment_Setup` | Scripts and configurations for serving the model via API. |
 | `src/` | Core source code for preprocessing pipelines and model utilities. |
-| `app.py` | The main Flask application entry point. |
+| `main.py` | The main Flask application entry point. |
 
 ## 📊 Methodology
 1.  **Data Ingestion:** Loaded historical loan data (2007-2014).
