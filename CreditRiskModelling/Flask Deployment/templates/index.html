@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Intelligence Engine</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1e1e2f 0%, #27293d 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background-color: #27293d;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0px 15px 25px rgba(0,0,0,0.5);
+      max-width: 900px;
+      border: 1px solid #383a50;
+    }
+
+    h1 {
+      font-weight: 600;
+      color: #00d2ff; /* Cyan accent */
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      color: #9a9a9a;
+      font-size: 0.9rem;
+      margin-bottom: 30px;
+    }
+
+    label {
+      color: #cfcfcf;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+
+    .form-control {
+      background-color: #1e1e2f;
+      border: 1px solid #2b3553;
+      color: #ffffff;
+      border-radius: 6px;
+      height: 45px;
+    }
+
+    .form-control:focus {
+      background-color: #1e1e2f;
+      border-color: #00d2ff;
+      color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, #00d2ff, #007bff);
+      border: none;
+      padding: 12px 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
+    }
+
+    .result-card {
+      margin-top: 30px;
+      background: rgba(0, 210, 255, 0.1);
+      border: 1px solid #00d2ff;
+      border-radius: 10px;
+      padding: 20px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .result-value {
+      font-size: 2em;
+      font-weight: bold;
+      color: #00d2ff;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Input Icon styling */
+    .input-group-text {
+        background-color: #2b3553;
+        border: 1px solid #2b3553;
+        color: #00d2ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="text-center">
+      <h1><i class="fas fa-chart-line"></i> EPS Predictor AI</h1>
+      <p class="subtitle">Enter financial metrics to forecast Earnings Per Share</p>
+    </div>
+    
+    <form action="/predict" method="POST">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>ROCE (%)</label>
+            <input type="number" step="any" class="form-control" name="ROCE (%)" required placeholder="e.g. 15.5" value="{{ v1 }}">
+          </div>
+          <div class="form-group">
+            <label>CASA (%)</label>
+            <input type="number" step="any" class="form-control" name="CASA (%)" required placeholder="e.g. 40.2" value="{{ v2 }}">
+          </div>
+          <div class="form-group">
+            <label>Return on Equity / Networth (%)</label>
+            <input type="number" step="any" class="form-control" name="Return on Equity / Networth (%)" required placeholder="e.g. 12.8" value="{{ v3 }}">
+          </div>
+          <div class="form-group">
+            <label>Non-Interest Income/Total Assets (%)</label>
+            <input type="number" step="any" class="form-control" name="Non-Interest Income/Total Assets (%)" required placeholder="e.g. 2.1" value="{{ v4 }}">
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Operating Profit/Total Assets (%)</label>
+            <input type="number" step="any" class="form-control" name="Operating Profit/Total Assets (%)" required placeholder="e.g. 3.5" value="{{ v5 }}">
+          </div>
+          <div class="form-group">
+            <label>Operating Expenses/Total Assets (%)</label>
+            <input type="number" step="any" class="form-control" name="Operating Expenses/Total Assets (%)" required placeholder="e.g. 1.8" value="{{ v6 }}">
+          </div>
+          <div class="form-group">
+            <label>Interest Expenses/Total Assets (%)</label>
+            <input type="number" step="any" class="form-control" name="Interest Expenses/Total Assets (%)" required placeholder="e.g. 4.2" value="{{ v7 }}">
+          </div>
+          <div class="form-group">
+            <label>Face Value</label>
+            <input type="number" step="any" class="form-control" name="Face_value" required placeholder="e.g. 10" value="{{ v8 }}">
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center mt-3">
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-calculator"></i> Run Prediction
+          </button>
+        </div>
+      </div>
+    </form>
+
+    {% if result %}
+    <div class="text-center result-card">
+      <p style="margin-bottom: 0px; color: #cfcfcf;">Predicted EPS Value</p>
+      <span class="result-value">{{ result }}</span>
+    </div>
+    {% endif %}
+
+  </div>
+</body>
+</html>
